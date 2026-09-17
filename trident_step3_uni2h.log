@@ -29,3 +29,7 @@ usage: run_batch_of_slides.py [-h] [--gpu GPU] [--gpus GPUS [GPUS ...]]
                               [--feat_batch_size FEAT_BATCH_SIZE]
 run_batch_of_slides.py: error: argument --patch_encoder: invalid choice: 'uni2h' (choose from 'conch_v1', 'conch_v15', 'uni_v1', 'uni_v2', 'ctranspath', 'phikon', 'phikon_v2', 'resnet50', 'keep', 'gigapath', 'gigapath-flash', 'virchow', 'virchow2', 'virchow2-cls', 'hoptimus0', 'hoptimus1', 'h0-mini', 'musk', 'openmidnight', 'gpfm', 'hibou_l', 'kaiko-vitb8', 'kaiko-vitb16', 'kaiko-vits8', 'kaiko-vits16', 'kaiko-vitl14', 'lunit-vits8', 'midnight12k', 'phaet', 'mascaret', 'genbio-pathfm', 'gemma4-e4b', 'gemma4-26b')
 Done: Thu Sep 17 15:38:39 EDT 2026
+[MAIN] Found 1 slides. Processing 1 pending slides (0 skipped).
+[PROCESSOR] Found 1 valid slides in /restricted/projectnb/luadfrp.
+Extracting patch features from coords in 20x_224px_0px_overlap:   0%|          | 0/1 [00:00<?, ?it/s]Extracting patch features from coords in 20x_224px_0px_overlap:   0%|          | 0/1 [00:00<?, ?it/s, Extracting features from test.svs]Extracting patch features from coords in 20x_224px_0px_overlap: 100%|██████████| 1/1 [00:49<00:00, 49.83s/it, Extracting features from test.svs]Extracting patch features from coords in 20x_224px_0px_overlap: 100%|██████████| 1/1 [00:49<00:00, 49.84s/it, Extracting features from test.svs]
+Done: Thu Sep 17 16:42:49 EDT 2026

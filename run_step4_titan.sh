@@ -3,8 +3,8 @@
 #$ -l gpus=1
 #$ -l h_rt=2:00:00
 #$ -l gpu_type=A100
-#$ -N trident_uni2h
-#$ -o trident_step3_uni2h.log
+#$ -N trident_titan
+#$ -o trident_step4_titan.log
 #$ -j y
 
 module load miniconda
@@ -17,7 +17,7 @@ python run_batch_of_slides.py \
   --wsi_dir /restricted/projectnb/luadfrp \
   --job_dir /restricted/projectnb/luadfrp/trident_output \
   --custom_list_of_wsis ~/wsi-processing-pipeline/test_slides.csv \
-  --patch_encoder uni_v2 \
+  --slide_encoder titan \
   --patch_size 224 \
   --mag 20
 
