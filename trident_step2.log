@@ -1,0 +1,4 @@
+[MAIN] Found 1 slides. Processing 1 pending slides (0 skipped).
+[PROCESSOR] Found 1 valid slides in /restricted/projectnb/luadfrp.
+Saving tissue coordinates to 20x_224px_0px_overlap:   0%|          | 0/1 [00:00<?, ?it/s]Saving tissue coordinates to 20x_224px_0px_overlap:   0%|          | 0/1 [00:00<?, ?it/s, Generating patch coords for test.svs]Saving tissue coordinates to 20x_224px_0px_overlap: 100%|██████████| 1/1 [00:02<00:00,  2.08s/it, Generating patch coords for test.svs]Saving tissue coordinates to 20x_224px_0px_overlap: 100%|██████████| 1/1 [00:02<00:00,  2.08s/it, Generating patch coords for test.svs]
+Done: Thu Sep 17 15:04:39 EDT 2026
