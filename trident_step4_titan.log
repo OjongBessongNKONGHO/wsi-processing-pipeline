@@ -1,0 +1,131 @@
+A new version of the following files was downloaded from https://huggingface.co/MahmoodLab/TITAN:
+- configuration_titan.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+A new version of the following files was downloaded from https://huggingface.co/MahmoodLab/TITAN:
+- conch_tokenizer.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+A new version of the following files was downloaded from https://huggingface.co/MahmoodLab/TITAN:
+- text_transformer.py
+- conch_tokenizer.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+A new version of the following files was downloaded from https://huggingface.co/MahmoodLab/TITAN:
+- conch_v1_5.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+A new version of the following files was downloaded from https://huggingface.co/MahmoodLab/TITAN:
+- vision_transformer.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+A new version of the following files was downloaded from https://huggingface.co/MahmoodLab/TITAN:
+- modeling_titan.py
+- text_transformer.py
+- conch_v1_5.py
+- vision_transformer.py
+. Make sure to double-check they do not contain any added malicious code. To avoid downloading new versions of the code file, you can pin a revision.
+Traceback (most recent call last):
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 403, in hf_raise_for_status
+    response.raise_for_status()
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 403 Client Error: Forbidden for url: https://huggingface.co/MahmoodLab/conchv1_5/resolve/main/meta.yaml
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr2/collab/onkongho/trident/trident/patch_encoder_models/load.py", line 1426, in _build
+    model, eval_transform = create_model_from_pretrained(checkpoint_path="hf_hub:MahmoodLab/conchv1_5", img_size=img_size)
+  File "/usr2/collab/onkongho/trident/trident/patch_encoder_models/model_zoo/conchv1_5/conchv1_5.py", line 664, in create_model_from_pretrained
+    _ = hf_hub_download(
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1014, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1121, in _hf_hub_download_to_cache_dir
+    _raise_on_head_call_error(head_call_error, force_download, local_files_only)
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1662, in _raise_on_head_call_error
+    raise head_call_error
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1550, in _get_metadata_or_catch_error
+    metadata = get_hf_file_metadata(
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1467, in get_hf_file_metadata
+    r = _request_wrapper(
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 283, in _request_wrapper
+    response = _request_wrapper(
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 307, in _request_wrapper
+    hf_raise_for_status(response)
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 420, in hf_raise_for_status
+    raise _format(GatedRepoError, message, response) from e
+huggingface_hub.errors.GatedRepoError: 403 Client Error. (Request ID: Root=1-6aac5afb-060069e800842c54635fd5a5;9e3cc3c0-71bf-438e-b020-6d80f7f492b2)
+
+Cannot access gated repo for url https://huggingface.co/MahmoodLab/conchv1_5/resolve/main/meta.yaml.
+Access to model MahmoodLab/conchv1_5 is restricted and you are not in the authorized list. Visit https://huggingface.co/MahmoodLab/conchv1_5 to ask for access.
+[MAIN] Found 1 slides. Processing 1 pending slides (0 skipped).
+[PROCESSOR] Found 1 valid slides in /restricted/projectnb/luadfrp.
+[PROCESSOR] Some patch features haven't been extracted in 0/1 WSIs. Starting extraction.
+Traceback (most recent call last):
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 403, in hf_raise_for_status
+    response.raise_for_status()
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/requests/models.py", line 1167, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 403 Client Error: Forbidden for url: https://huggingface.co/MahmoodLab/conchv1_5/resolve/main/meta.yaml
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr2/collab/onkongho/trident/trident/patch_encoder_models/load.py", line 1426, in _build
+    model, eval_transform = create_model_from_pretrained(checkpoint_path="hf_hub:MahmoodLab/conchv1_5", img_size=img_size)
+  File "/usr2/collab/onkongho/trident/trident/patch_encoder_models/model_zoo/conchv1_5/conchv1_5.py", line 664, in create_model_from_pretrained
+    _ = hf_hub_download(
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1014, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1121, in _hf_hub_download_to_cache_dir
+    _raise_on_head_call_error(head_call_error, force_download, local_files_only)
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1662, in _raise_on_head_call_error
+    raise head_call_error
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1550, in _get_metadata_or_catch_error
+    metadata = get_hf_file_metadata(
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1467, in get_hf_file_metadata
+    r = _request_wrapper(
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 283, in _request_wrapper
+    response = _request_wrapper(
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 307, in _request_wrapper
+    hf_raise_for_status(response)
+  File "/rprojectnb/luadfrp/onkongho/.conda/envs/trident/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 420, in hf_raise_for_status
+    raise _format(GatedRepoError, message, response) from e
+huggingface_hub.errors.GatedRepoError: 403 Client Error. (Request ID: Root=1-6aac5afb-060069e800842c54635fd5a5;9e3cc3c0-71bf-438e-b020-6d80f7f492b2)
+
+Cannot access gated repo for url https://huggingface.co/MahmoodLab/conchv1_5/resolve/main/meta.yaml.
+Access to model MahmoodLab/conchv1_5 is restricted and you are not in the authorized list. Visit https://huggingface.co/MahmoodLab/conchv1_5 to ask for access.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr2/collab/onkongho/trident/run_batch_of_slides.py", line 642, in <module>
+    main()
+  File "/usr2/collab/onkongho/trident/run_batch_of_slides.py", line 602, in main
+    worker_entrypoint(worker_args)
+  File "/usr2/collab/onkongho/trident/run_batch_of_slides.py", line 544, in worker_entrypoint
+    run_task(processor, local_args)
+  File "/usr2/collab/onkongho/trident/run_batch_of_slides.py", line 339, in run_task
+    processor.run_slide_feature_extraction_job(
+  File "/usr2/collab/onkongho/trident/trident/Processor.py", line 954, in run_slide_feature_extraction_job
+    patch_encoder = encoder_factory(slide_to_patch_encoder_name[slide_encoder.enc_name])
+  File "/usr2/collab/onkongho/trident/trident/patch_encoder_models/load.py", line 127, in encoder_factory
+    return encoder_registry[model_name](**kwargs)
+  File "/usr2/collab/onkongho/trident/trident/patch_encoder_models/load.py", line 1406, in __init__
+    super().__init__(**build_kwargs)
+  File "/usr2/collab/onkongho/trident/trident/patch_encoder_models/load.py", line 163, in __init__
+    self.model, self.eval_transforms, self.precision = self._build(**build_kwargs)
+  File "/usr2/collab/onkongho/trident/trident/patch_encoder_models/load.py", line 1429, in _build
+    raise Exception("Failed to download CONCH v1.5 model, make sure that you were granted access and that you correctly registered your token")
+Exception: Failed to download CONCH v1.5 model, make sure that you were granted access and that you correctly registered your token
+Done: Thu Sep 17 17:26:21 EDT 2026
+[MAIN] Found 1 slides. Processing 1 pending slides (0 skipped).
+[PROCESSOR] Found 1 valid slides in /restricted/projectnb/luadfrp.
+[PROCESSOR] Some patch features haven't been extracted in 0/1 WSIs. Starting extraction.
+Extracting patch features from coords in 20x_224px_0px_overlap:   0%|          | 0/1 [00:00<?, ?it/s]Extracting patch features from coords in 20x_224px_0px_overlap:   0%|          | 0/1 [00:00<?, ?it/s, Extracting features from test.svs]Extracting patch features from coords in 20x_224px_0px_overlap: 100%|██████████| 1/1 [01:22<00:00, 82.12s/it, Extracting features from test.svs]Extracting patch features from coords in 20x_224px_0px_overlap: 100%|██████████| 1/1 [01:22<00:00, 82.12s/it, Extracting features from test.svs]
+Extracting slide features using titan:   0%|          | 0/1 [00:00<?, ?it/s]Extracting slide features using titan:   0%|          | 0/1 [00:00<?, ?it/s, Extracting slide features for test.svs]Extracting slide features using titan: 100%|██████████| 1/1 [00:24<00:00, 24.57s/it, Extracting slide features for test.svs]Extracting slide features using titan: 100%|██████████| 1/1 [00:24<00:00, 24.57s/it, Extracting slide features for test.svs]
+Done: Thu Sep 17 17:33:17 EDT 2026
