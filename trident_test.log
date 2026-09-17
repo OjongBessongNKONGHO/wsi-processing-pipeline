@@ -1,0 +1,7 @@
+[MAIN] Found 1 slides. Processing 1 pending slides (0 skipped).
+[PROCESSOR] Found 1 valid slides in /restricted/projectnb/luadfrp.
+Downloading: "https://download.pytorch.org/models/resnet50-0676ba61.pth" to /usr2/collab/onkongho/.cache/torch/hub/checkpoints/resnet50-0676ba61.pth
+  0%|          | 0.00/97.8M [00:00<?, ?B/s]  3%|▎         | 2.50M/97.8M [00:00<00:03, 25.8MB/s]  9%|▊         | 8.50M/97.8M [00:00<00:01, 47.1MB/s] 17%|█▋        | 16.6M/97.8M [00:00<00:01, 60.3MB/s] 33%|███▎      | 32.1M/97.8M [00:00<00:01, 67.4MB/s] 39%|███▉      | 38.4M/97.8M [00:00<00:01, 51.3MB/s] 44%|████▍     | 43.5M/97.8M [00:00<00:01, 51.8MB/s] 51%|█████     | 49.6M/97.8M [00:00<00:00, 54.8MB/s] 67%|██████▋   | 65.6M/97.8M [00:01<00:00, 70.6MB/s] 77%|███████▋  | 75.4M/97.8M [00:01<00:00, 77.7MB/s] 85%|████████▍ | 83.0M/97.8M [00:01<00:00, 70.2MB/s]100%|██████████| 97.8M/97.8M [00:01<00:00, 70.0MB/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:03<00:00,  3.09s/it]Fetching 1 files: 100%|██████████| 1/1 [00:03<00:00,  3.09s/it]
+Segmenting tissue:   0%|          | 0/1 [00:00<?, ?it/s]Segmenting tissue:   0%|          | 0/1 [00:00<?, ?it/s, Segmenting <name=test>]Segmenting tissue: 100%|██████████| 1/1 [00:21<00:00, 21.11s/it, Segmenting <name=test>]Segmenting tissue: 100%|██████████| 1/1 [00:21<00:00, 21.11s/it, Segmenting <name=test>]
+Done: Thu Sep 17 14:42:31 EDT 2026
