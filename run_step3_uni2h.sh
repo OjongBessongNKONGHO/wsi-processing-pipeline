@@ -17,7 +17,7 @@ python run_batch_of_slides.py \
   --wsi_dir /restricted/projectnb/luadfrp \
   --job_dir /restricted/projectnb/luadfrp/trident_output \
   --custom_list_of_wsis ~/wsi-processing-pipeline/test_slides.csv \
-  --patch_encoder uni2h \
+  --patch_encoder uni_v2 \
   --patch_size 224 \
   --mag 20
 
