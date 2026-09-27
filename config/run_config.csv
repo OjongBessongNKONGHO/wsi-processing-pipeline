@@ -1,0 +1,10 @@
+parameter,value,options
+wsi_source,/restricted/projectnb/luadfrp/NLST/NLST_pathhe_batch1.zip,"path to zip file or directory of .svs files"
+job_dir,/restricted/projectnb/luadfrp/trident_output,"output directory for results"
+segmenter,hest,"hest | grandqc | otsu"
+remove_artifacts,false,"true | false"
+remove_penmarks,false,"true | false"
+patch_encoder,uni_v2,"uni_v1 (256/20) | uni_v2 (256/20) | conch_v15 (512/20) | virchow (224/20) | virchow2 (224/20) | see encoder_registry.py for all 33"
+slide_encoder,titan,"titan (needs conch_v15) | prism (needs virchow2) | gigapath (needs gigapath) | leave empty for patch features only"
+batch_size,2,"number of slides to extract and process at a time"
+cleanup,true,"true = delete .svs after features extracted | false = keep .svs files"
