@@ -3,6 +3,7 @@
 #$ -l gpus=1
 #$ -l h_rt=12:00:00
 #$ -l gpu_type=A100
+#$ -pe omp 8
 #$ -N wsi_batch
 #$ -o batch_run.log
 #$ -j y
