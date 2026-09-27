@@ -185,6 +185,51 @@ def run_pipeline(csv_path: str, wsi_dir: str, job_dir: str) -> dict:
         # Stage 4: Slide Feature Extraction (if slide_encoder specified)
         slide_encoder = row.get("slide_encoder", "").strip()
         if slide_encoder:
+            slide_spec = get_slide_encoder_spec(slide_encoder)
+            required_patch_encoder = slide_spec["requires_patch_encoder"]
+
+            from src.encoder_registry import get_patch_encoder_spec
+            required_spec = get_patch_encoder_spec(required_patch_encoder)
+            req_patch_size = str(required_spec["patch_size"])
+            req_mag = str(required_spec["mag"])
+
+            # Only run extra steps if slide encoder needs different patch_size
+            if req_patch_size != row["patch_size"].strip():
+                # Stage 4a: Extract coords at slide encoder's required patch_size
+                coords_512_cmd = [
+                    "python", TRIDENT_SCRIPT,
+                    "--task", "coords",
+                    "--wsi_dir", wsi_dir,
+                    "--job_dir", job_dir,
+                    "--custom_list_of_wsis", slide_list_path,
+                    "--mag", req_mag,
+                    "--patch_size", req_patch_size,
+                    "--overlap", "0",
+                ]
+                if not run_command(coords_512_cmd, f"Patch Extraction ({req_patch_size}px for {slide_encoder})", wsi):
+                    slide_success = False
+                    failed += 1
+                    results.append({"wsi": wsi, "status": "FAILED", "stage": "slide_coords"})
+                    continue
+
+                # Stage 4b: Extract patch features with required patch encoder
+                patch_feat_512_cmd = [
+                    "python", TRIDENT_SCRIPT,
+                    "--task", "feat",
+                    "--wsi_dir", wsi_dir,
+                    "--job_dir", job_dir,
+                    "--custom_list_of_wsis", slide_list_path,
+                    "--patch_encoder", required_patch_encoder,
+                    "--mag", req_mag,
+                    "--patch_size", req_patch_size,
+                ]
+                if not run_command(patch_feat_512_cmd, f"Patch Features ({required_patch_encoder} for {slide_encoder})", wsi):
+                    slide_success = False
+                    failed += 1
+                    results.append({"wsi": wsi, "status": "FAILED", "stage": "slide_patch_features"})
+                    continue
+
+            # Stage 4c: Run slide encoder
             slide_feat_cmd = build_slide_feat_command(row, wsi_dir, job_dir)
             slide_feat_cmd[slide_feat_cmd.index("")] = slide_list_path
             if not run_command(slide_feat_cmd, "Slide Feature Extraction", wsi):

@@ -5,3 +5,139 @@
 [MAIN] Found 1 slides. Processing 1 pending slides (0 skipped).
 [PROCESSOR] Found 1 valid slides in /restricted/projectnb/luadfrp.
 Saving tissue coordinates to 20x_256px_0px_overlap:   0%|          | 0/1 [00:00<?, ?it/s]Saving tissue coordinates to 20x_256px_0px_overlap:   0%|          | 0/1 [00:00<?, ?it/s, Generating patch coords for test.svs]Saving tissue coordinates to 20x_256px_0px_overlap: 100%|██████████| 1/1 [00:01<00:00,  1.29s/it, Generating patch coords for test.svs]Saving tissue coordinates to 20x_256px_0px_overlap: 100%|██████████| 1/1 [00:01<00:00,  1.29s/it, Generating patch coords for test.svs]
+[MAIN] Found 1 slides. Processing 1 pending slides (0 skipped).
+[PROCESSOR] Found 1 valid slides in /restricted/projectnb/luadfrp.
+Extracting patch features from coords in 20x_256px_0px_overlap:   0%|          | 0/1 [00:00<?, ?it/s]Extracting patch features from coords in 20x_256px_0px_overlap:   0%|          | 0/1 [00:00<?, ?it/s, Extracting features from test.svs]Extracting patch features from coords in 20x_256px_0px_overlap: 100%|██████████| 1/1 [00:34<00:00, 34.82s/it, Extracting features from test.svs]Extracting patch features from coords in 20x_256px_0px_overlap: 100%|██████████| 1/1 [00:34<00:00, 34.82s/it, Extracting features from test.svs]
+[MAIN] Found 1 slides. Processing 1 pending slides (0 skipped).
+[PROCESSOR] Found 1 valid slides in /restricted/projectnb/luadfrp.
+[PROCESSOR] Some patch features haven't been extracted in 0/1 WSIs. Starting extraction.
+Extracting patch features from coords in 20x_512px_0px_overlap:   0%|          | 0/1 [00:00<?, ?it/s]Extracting patch features from coords in 20x_512px_0px_overlap:   0%|          | 0/1 [00:00<?, ?it/s, Coords not found for test. Skipping...]Extracting patch features from coords in 20x_512px_0px_overlap: 100%|██████████| 1/1 [00:00<00:00, 276.30it/s, Coords not found for test. Skipping...]
+Extracting slide features using titan:   0%|          | 0/1 [00:00<?, ?it/s]Extracting slide features using titan:   0%|          | 0/1 [00:00<?, ?it/s, Patch features not found for test. Skipping...]Extracting slide features using titan: 100%|██████████| 1/1 [00:00<00:00, 430.27it/s, Patch features not found for test. Skipping...]
+Validating config...
+  Note row 2: Slide encoder 'titan' will extract 'conch_v15' features internally (independent of patch_encoder 'uni_v2')
+Config valid: config/pipeline_config.csv
+✓ Config valid.
+
+
+Pipeline starting: 1 slide(s) to process
+WSI directory: /restricted/projectnb/luadfrp
+Output directory: /restricted/projectnb/luadfrp/trident_output
+
+############################################################
+Slide 1/1: test.svs
+############################################################
+
+============================================================
+[09:47:40] Tissue Segmentation: test.svs
+Command: python /usr2/collab/onkongho/trident/run_batch_of_slides.py --task seg --wsi_dir /restricted/projectnb/luadfrp --job_dir /restricted/projectnb/luadfrp/trident_output --custom_list_of_wsis /restricted/projectnb/luadfrp/trident_output/_temp_slide_list_test.svs.csv --segmenter hest
+============================================================
+
+✓ COMPLETE: Tissue Segmentation for test.svs
+
+============================================================
+[09:48:55] Patch Extraction: test.svs
+Command: python /usr2/collab/onkongho/trident/run_batch_of_slides.py --task coords --wsi_dir /restricted/projectnb/luadfrp --job_dir /restricted/projectnb/luadfrp/trident_output --custom_list_of_wsis /restricted/projectnb/luadfrp/trident_output/_temp_slide_list_test.svs.csv --mag 20 --patch_size 256 --overlap 0
+============================================================
+
+✓ COMPLETE: Patch Extraction for test.svs
+
+============================================================
+[09:49:03] Patch Feature Extraction: test.svs
+Command: python /usr2/collab/onkongho/trident/run_batch_of_slides.py --task feat --wsi_dir /restricted/projectnb/luadfrp --job_dir /restricted/projectnb/luadfrp/trident_output --custom_list_of_wsis /restricted/projectnb/luadfrp/trident_output/_temp_slide_list_test.svs.csv --patch_encoder uni_v2 --mag 20 --patch_size 256
+============================================================
+
+✓ COMPLETE: Patch Feature Extraction for test.svs
+
+============================================================
+[09:50:02] Slide Feature Extraction: test.svs
+Command: python /usr2/collab/onkongho/trident/run_batch_of_slides.py --task feat --wsi_dir /restricted/projectnb/luadfrp --job_dir /restricted/projectnb/luadfrp/trident_output --custom_list_of_wsis /restricted/projectnb/luadfrp/trident_output/_temp_slide_list_test.svs.csv --slide_encoder titan --patch_size 512 --mag 20
+============================================================
+
+✓ COMPLETE: Slide Feature Extraction for test.svs
+
+============================================================
+PIPELINE COMPLETE
+============================================================
+Total slides: 1
+Successful:   1
+Failed:       0
+Time elapsed: 0:03:01.204703
+============================================================
+Run report saved: /restricted/projectnb/luadfrp/trident_output/run_report_20260927_095041.csv
+[MAIN] Found 1 slides. Processing 0 pending slides (1 skipped).
+[MAIN] Found 1 slides. Processing 0 pending slides (1 skipped).
+[MAIN] Found 1 slides. Processing 0 pending slides (1 skipped).
+[MAIN] Found 1 slides. Processing 1 pending slides (0 skipped).
+[PROCESSOR] Found 1 valid slides in /restricted/projectnb/luadfrp.
+Saving tissue coordinates to 20x_512px_0px_overlap:   0%|          | 0/1 [00:00<?, ?it/s]Saving tissue coordinates to 20x_512px_0px_overlap:   0%|          | 0/1 [00:00<?, ?it/s, Generating patch coords for test.svs]Saving tissue coordinates to 20x_512px_0px_overlap: 100%|██████████| 1/1 [00:00<00:00,  1.21it/s, Generating patch coords for test.svs]Saving tissue coordinates to 20x_512px_0px_overlap: 100%|██████████| 1/1 [00:00<00:00,  1.21it/s, Generating patch coords for test.svs]
+[MAIN] Found 1 slides. Processing 1 pending slides (0 skipped).
+[PROCESSOR] Found 1 valid slides in /restricted/projectnb/luadfrp.
+Extracting patch features from coords in 20x_512px_0px_overlap:   0%|          | 0/1 [00:00<?, ?it/s]Extracting patch features from coords in 20x_512px_0px_overlap:   0%|          | 0/1 [00:00<?, ?it/s, Extracting features from test.svs]Extracting patch features from coords in 20x_512px_0px_overlap: 100%|██████████| 1/1 [00:17<00:00, 17.53s/it, Extracting features from test.svs]Extracting patch features from coords in 20x_512px_0px_overlap: 100%|██████████| 1/1 [00:17<00:00, 17.54s/it, Extracting features from test.svs]
+[MAIN] Found 1 slides. Processing 1 pending slides (0 skipped).
+[PROCESSOR] Found 1 valid slides in /restricted/projectnb/luadfrp.
+Extracting slide features using titan:   0%|          | 0/1 [00:00<?, ?it/s]Extracting slide features using titan:   0%|          | 0/1 [00:00<?, ?it/s, Extracting slide features for test.svs]Extracting slide features using titan: 100%|██████████| 1/1 [00:03<00:00,  3.48s/it, Extracting slide features for test.svs]Extracting slide features using titan: 100%|██████████| 1/1 [00:03<00:00,  3.48s/it, Extracting slide features for test.svs]
+Validating config...
+  Note row 2: Slide encoder 'titan' will extract 'conch_v15' features internally (independent of patch_encoder 'uni_v2')
+Config valid: config/pipeline_config.csv
+✓ Config valid.
+
+
+Pipeline starting: 1 slide(s) to process
+WSI directory: /restricted/projectnb/luadfrp
+Output directory: /restricted/projectnb/luadfrp/trident_output
+
+############################################################
+Slide 1/1: test.svs
+############################################################
+
+============================================================
+[10:00:20] Tissue Segmentation: test.svs
+Command: python /usr2/collab/onkongho/trident/run_batch_of_slides.py --task seg --wsi_dir /restricted/projectnb/luadfrp --job_dir /restricted/projectnb/luadfrp/trident_output --custom_list_of_wsis /restricted/projectnb/luadfrp/trident_output/_temp_slide_list_test.svs.csv --segmenter hest
+============================================================
+
+✓ COMPLETE: Tissue Segmentation for test.svs
+
+============================================================
+[10:00:27] Patch Extraction: test.svs
+Command: python /usr2/collab/onkongho/trident/run_batch_of_slides.py --task coords --wsi_dir /restricted/projectnb/luadfrp --job_dir /restricted/projectnb/luadfrp/trident_output --custom_list_of_wsis /restricted/projectnb/luadfrp/trident_output/_temp_slide_list_test.svs.csv --mag 20 --patch_size 256 --overlap 0
+============================================================
+
+✓ COMPLETE: Patch Extraction for test.svs
+
+============================================================
+[10:00:31] Patch Feature Extraction: test.svs
+Command: python /usr2/collab/onkongho/trident/run_batch_of_slides.py --task feat --wsi_dir /restricted/projectnb/luadfrp --job_dir /restricted/projectnb/luadfrp/trident_output --custom_list_of_wsis /restricted/projectnb/luadfrp/trident_output/_temp_slide_list_test.svs.csv --patch_encoder uni_v2 --mag 20 --patch_size 256
+============================================================
+
+✓ COMPLETE: Patch Feature Extraction for test.svs
+
+============================================================
+[10:00:36] Patch Extraction (512px for titan): test.svs
+Command: python /usr2/collab/onkongho/trident/run_batch_of_slides.py --task coords --wsi_dir /restricted/projectnb/luadfrp --job_dir /restricted/projectnb/luadfrp/trident_output --custom_list_of_wsis /restricted/projectnb/luadfrp/trident_output/_temp_slide_list_test.svs.csv --mag 20 --patch_size 512 --overlap 0
+============================================================
+
+✓ COMPLETE: Patch Extraction (512px for titan) for test.svs
+
+============================================================
+[10:00:41] Patch Features (conch_v15 for titan): test.svs
+Command: python /usr2/collab/onkongho/trident/run_batch_of_slides.py --task feat --wsi_dir /restricted/projectnb/luadfrp --job_dir /restricted/projectnb/luadfrp/trident_output --custom_list_of_wsis /restricted/projectnb/luadfrp/trident_output/_temp_slide_list_test.svs.csv --patch_encoder conch_v15 --mag 20 --patch_size 512
+============================================================
+
+✓ COMPLETE: Patch Features (conch_v15 for titan) for test.svs
+
+============================================================
+[10:01:07] Slide Feature Extraction: test.svs
+Command: python /usr2/collab/onkongho/trident/run_batch_of_slides.py --task feat --wsi_dir /restricted/projectnb/luadfrp --job_dir /restricted/projectnb/luadfrp/trident_output --custom_list_of_wsis /restricted/projectnb/luadfrp/trident_output/_temp_slide_list_test.svs.csv --slide_encoder titan --patch_size 512 --mag 20
+============================================================
+
+✓ COMPLETE: Slide Feature Extraction for test.svs
+
+============================================================
+PIPELINE COMPLETE
+============================================================
+Total slides: 1
+Successful:   1
+Failed:       0
+Time elapsed: 0:00:57.637175
+============================================================
+Run report saved: /restricted/projectnb/luadfrp/trident_output/run_report_20260927_100118.csv
