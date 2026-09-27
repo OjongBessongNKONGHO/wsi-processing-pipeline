@@ -1,0 +1,2 @@
+wsi,segmenter,remove_artifacts,remove_penmarks,patch_encoder,patch_size,mag,overlap,slide_encoder
+test.svs,hest,false,false,fake_encoder,256,20,0,titan
