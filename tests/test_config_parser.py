@@ -30,8 +30,8 @@ def write_config(tmp_path, rows):
 
 
 VALID_PARAMS = [
-    ("wsi_source", "/restricted/projectnb/luadfrp/NLST/NLST_pathhe_batch1.zip"),
-    ("job_dir", "/restricted/projectnb/luadfrp/trident_output"),
+    ("wsi_source", os.path.join(FIXTURES, "test.svs")),
+    ("job_dir", "/tmp/trident_output"),
     ("segmenter", "hest"),
     ("remove_artifacts", "false"),
     ("remove_penmarks", "false"),
