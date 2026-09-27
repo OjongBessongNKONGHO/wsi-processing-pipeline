@@ -1,14 +1,2 @@
-# WSI Processing Pipeline — Example Config
-# ==========================================
-# wsi:              filename of the slide (must exist in wsi_dir)
-# segmenter:        hest | grandqc | otsu
-# remove_artifacts: true | false
-# remove_penmarks:  true | false
-# patch_encoder:    uni_v1 (256/20) | uni_v2 (256/20) | conch_v1 (256/20) | conch_v15 (512/20) | virchow (224/20) | virchow2 (224/20) | phikon (224/20) | gigapath (256/20) | ...
-# patch_size:       must match encoder (see above)
-# mag:              must match encoder (see above)
-# overlap:          0 or positive integer less than patch_size
-# slide_encoder:    titan (needs conch_v15) | gigapath (needs gigapath) | prism (needs virchow2) | leave empty for patch features only
-#
 wsi,segmenter,remove_artifacts,remove_penmarks,patch_encoder,patch_size,mag,overlap,slide_encoder
 test.svs,hest,false,false,uni_v2,256,20,0,titan
