@@ -32,6 +32,7 @@ def write_config(tmp_path, rows):
 VALID_PARAMS = [
     ("wsi_source", os.path.join(FIXTURES, "test.svs")),
     ("job_dir", "/tmp/trident_output"),
+    ("study_name", "NLST"),
     ("segmenter", "hest"),
     ("remove_artifacts", "false"),
     ("remove_penmarks", "false"),
