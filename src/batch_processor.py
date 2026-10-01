@@ -81,7 +81,12 @@ def process_batch(settings: dict, slide_filenames: list[str], wsi_dir: str) -> d
     Returns:
         Dict with success/failed counts.
     """
-    job_dir = settings["job_dir"]
+    base_job_dir = settings["job_dir"]
+    study_name = settings.get("study_name", "").strip()
+    if study_name:
+        job_dir = os.path.join(base_job_dir, study_name)
+    else:
+        job_dir = base_job_dir
     os.makedirs(job_dir, exist_ok=True)
 
     # Create slide list CSV

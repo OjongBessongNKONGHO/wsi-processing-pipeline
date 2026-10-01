@@ -53,7 +53,7 @@ def parse_config(csv_path: str) -> tuple[dict, list[ConfigError]]:
 
     # Validate required parameters exist
     required = [
-        "wsi_source", "job_dir", "segmenter", "remove_artifacts",
+        "wsi_source", "job_dir", "study_name", "segmenter", "remove_artifacts",
         "remove_penmarks", "patch_encoder", "slide_encoder",
         "batch_size", "cleanup",
     ]
@@ -73,6 +73,14 @@ def parse_config(csv_path: str) -> tuple[dict, list[ConfigError]]:
     job_parent = os.path.dirname(settings["job_dir"])
     if job_parent and not os.path.exists(job_parent):
         errors.append(ConfigError("job_dir", settings["job_dir"], "Parent directory does not exist"))
+
+    # Validate study_name
+    study_name = settings["study_name"]
+    if not study_name.replace("_", "").replace("-", "").isalnum():
+        errors.append(ConfigError(
+            "study_name", study_name,
+            "Must contain only letters, numbers, hyphens, or underscores"
+        ))
 
     # Validate segmenter
     segmenter = settings["segmenter"].lower()
