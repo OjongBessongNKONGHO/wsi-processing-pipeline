@@ -14,7 +14,7 @@ from datetime import datetime
 from src.encoder_registry import get_slide_encoder_spec
 
 
-TRIDENT_SCRIPT = os.path.expanduser("~/trident/run_batch_of_slides.py")
+TRIDENT_SCRIPT = os.path.expanduser("/restricted/projectnb/luadfrp/trident-src/trident/run_batch_of_slides.py")
 
 
 def build_seg_command(row: dict, wsi_dir: str, job_dir: str) -> list[str]:
