@@ -122,6 +122,7 @@ trident_output/nlst_batchN_7x/20x_256px_0px_overlap/
 
 ## Project Structure
 
+```
 wsi-processing-pipeline/
 +-- run_pipeline.py # Single entry point: validate then run
 +-- src/
