@@ -1,14 +1,15 @@
 #!/bin/bash -l
 #$ -P luadfrp
+#$ -pe omp 4
 #$ -l gpus=1
-#$ -l h_rt=2:00:00
-#$ -l gpu_type=A100
+#$ -l gpu_c=8.0
+#$ -l h_rt=48:00:00
 #$ -N wsi_pipeline
-#$ -o pipeline_run.log
 #$ -j y
+#$ -o pipeline_run.log
 
-module load miniconda
-conda activate trident
+module load cuda/12.2
+conda activate /rprojectnb/luadfrp/onkongho/.conda/envs/trident
 
 cd ~/wsi-processing-pipeline
 
