@@ -112,6 +112,7 @@ Verified on test slide: detected holes increased from 29 to 166, carving out pen
 
 ## Output Structure
 
+```
 trident_output/nlst_batchN_7x/20x_256px_0px_overlap/
 +-- features_conch_v15/ # N x 768 per slide (.h5)
 +-- features_uni_v2/ # N x 1,536 per slide (.h5)
