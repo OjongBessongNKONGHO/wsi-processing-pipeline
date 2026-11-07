@@ -35,6 +35,7 @@ We patched TRIDENT to support configurable artifact magnification. The upstream 
 
 Agreed with the supervising professor after iterating through four pipeline versions:
 
+```
 --segmenter grandqc
 --seg_conf_thresh 0.5
 --remove_artifacts
