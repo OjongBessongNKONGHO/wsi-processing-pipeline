@@ -1,2 +1,4 @@
 logs/
 *.sh.save
+__pycache__/
+*.log
