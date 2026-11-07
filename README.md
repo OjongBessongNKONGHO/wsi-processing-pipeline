@@ -120,6 +120,7 @@ trident_output/nlst_batchN_7x/20x_256px_0px_overlap/
 +-- slide_features_titan/ # 1 x 768 per slide (.h5)
 +-- patches/ # Patch coordinate files
 +-- visualization/ # Segmentation overlay images
+```
 
 
 ## Project Structure
