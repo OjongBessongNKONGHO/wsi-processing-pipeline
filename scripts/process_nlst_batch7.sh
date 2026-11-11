@@ -1,67 +1,49 @@
 #!/bin/bash -l
+
+# NLST Batch 7 (110 slides) -- Standardized Parameters
+#$ -N trident_b7
 #$ -P luadfrp
+#$ -pe omp 4
 #$ -l gpus=1
-#$ -l gpu_memory=48G
+#$ -l gpu_c=8.0
 #$ -l h_rt=48:00:00
-#$ -pe omp 8
-#$ -N nlst_batch7
+#$ -j y
 #$ -m ea
-#$ -M onkongho@bu.edu
 
-set -e
+TRIDENT_DIR="/usr2/collab/onkongho/trident"
+WSI_DIR="/restricted/projectnb/luadfrp/nlst_svs/batch7_svs"
+JOB_DIR="/restricted/projectnb/luadfrp/trident_output/nlst_batch7_7x"
+
 module load cuda/12.2
-conda activate /restricted/projectnb/luadfrp/onkongho/.conda/envs/trident
-export OGR_GEOJSON_MAX_OBJ_SIZE=0
+conda activate /rprojectnb/luadfrp/onkongho/.conda/envs/trident
+cd "$TRIDENT_DIR"
 
-WSI_DIR="/restricted/projectnb/luadfrp/trident_output/nlst_batch7/batch7"
-JOB_DIR="/restricted/projectnb/luadfrp/trident_output/nlst_batch7"
-TRIDENT="/restricted/projectnb/luadfrp/trident-src/trident/run_batch_of_slides.py"
+mkdir -p "$JOB_DIR"
 
-echo "=== Slides: $(ls "$WSI_DIR"/*.svs 2>/dev/null | wc -l) ==="
+echo "=== Batch 7: $(ls "$WSI_DIR"/*.svs 2>/dev/null | wc -l) slides ==="
 
-echo ""
-echo "=== Stage 1: seg + coords + UNI v2 (256px) ==="
-python "$TRIDENT" \
-    --job_dir "$JOB_DIR" \
-    --wsi_dir "$WSI_DIR" \
-    --wsi_ext .svs \
+# Step 1: Full pipeline (seg + coords + CONCH v1.5)
+python run_batch_of_slides.py \
     --task all \
-    --mag 20 \
-    --patch_size 256 \
-    --patch_encoder uni_v2
+    --wsi_dir "$WSI_DIR" --job_dir "$JOB_DIR" \
+    --segmenter grandqc --seg_conf_thresh 0.5 \
+    --remove_artifacts --artifact_mpp mpp15 \
+    --min_tissue_proportion 0.25 --skip_errors \
+    --mag 20 --patch_size 256 --max_workers 3 \
+    --patch_encoder conch_v15 --wsi_ext .svs
 
-echo "Contours: $(ls "$JOB_DIR/contours/" 2>/dev/null | wc -l)"
-echo "UNI v2: $(ls "$JOB_DIR/20x_256px_0px_overlap/features_uni_v2/" 2>/dev/null | wc -l)"
-
-echo ""
-echo "=== Stage 2: coords + CONCH v1.5 (512px) ==="
-python "$TRIDENT" \
-    --job_dir "$JOB_DIR" \
-    --wsi_dir "$WSI_DIR" \
-    --wsi_ext .svs \
-    --task all \
-    --mag 20 \
-    --patch_size 512 \
-    --patch_encoder conch_v15
-
-echo "CONCH v1.5: $(ls "$JOB_DIR/20x_512px_0px_overlap/features_conch_v15/" 2>/dev/null | wc -l)"
-
-echo ""
-echo "=== Stage 3: TITAN slide features ==="
-python "$TRIDENT" \
-    --job_dir "$JOB_DIR" \
-    --wsi_dir "$WSI_DIR" \
-    --wsi_ext .svs \
+# Step 2: UNI v2 patch features
+python run_batch_of_slides.py \
     --task feat \
-    --mag 20 \
-    --patch_size 512 \
-    --slide_encoder titan
+    --wsi_dir "$WSI_DIR" --job_dir "$JOB_DIR" \
+    --mag 20 --patch_size 256 --max_workers 3 \
+    --patch_encoder uni_v2 --skip_errors --wsi_ext .svs
 
-echo "TITAN: $(ls "$JOB_DIR/20x_512px_0px_overlap/slide_features_titan/" 2>/dev/null | wc -l)"
+# Step 3: TITAN slide-level features
+python run_batch_of_slides.py \
+    --task feat \
+    --wsi_dir "$WSI_DIR" --job_dir "$JOB_DIR" \
+    --mag 20 --patch_size 256 --max_workers 3 \
+    --slide_encoder titan --skip_errors --wsi_ext .svs
 
-echo ""
-echo "=== BATCH 7 COMPLETE ==="
-echo "Total contours: $(ls "$JOB_DIR/contours/" 2>/dev/null | wc -l)"
-echo "Total UNI v2: $(ls "$JOB_DIR/20x_256px_0px_overlap/features_uni_v2/" 2>/dev/null | wc -l)"
-echo "Total CONCH v1.5: $(ls "$JOB_DIR/20x_512px_0px_overlap/features_conch_v15/" 2>/dev/null | wc -l)"
-echo "Total TITAN: $(ls "$JOB_DIR/20x_512px_0px_overlap/slide_features_titan/" 2>/dev/null | wc -l)"
+echo "=== Batch 7 complete ==="

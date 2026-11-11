@@ -1,128 +1,49 @@
 #!/bin/bash -l
-#$ -P luadfrp
-#$ -l gpus=1
-#$ -l gpu_memory=48G
-#$ -l h_rt=48:00:00
-#$ -pe omp 8
-#$ -N nlst_batch5
-#$ -m ea
-#$ -M onkongho@bu.edu
 
-set -e
+# NLST Batch 5 (110 slides) -- Standardized Parameters
+#$ -N trident_b5
+#$ -P luadfrp
+#$ -pe omp 4
+#$ -l gpus=1
+#$ -l gpu_c=8.0
+#$ -l h_rt=48:00:00
+#$ -j y
+#$ -m ea
+
+TRIDENT_DIR="/usr2/collab/onkongho/trident"
+WSI_DIR="/restricted/projectnb/luadfrp/nlst_svs/batch5_svs"
+JOB_DIR="/restricted/projectnb/luadfrp/trident_output/nlst_batch5_7x"
 
 module load cuda/12.2
-conda activate /restricted/projectnb/luadfrp/onkongho/.conda/envs/trident
-export OGR_GEOJSON_MAX_OBJ_SIZE=0
-
-WORKING_DIR="/restricted/projectnb/luadfrp/nlst_batch5_working/batch5"
-JOB_DIR="/restricted/projectnb/luadfrp/trident_output/nlst_batch5"
-TRIDENT="/restricted/projectnb/luadfrp/trident-src/trident/run_batch_of_slides.py"
-SLIDE_LIST="$WORKING_DIR/current_slides.csv"
-TOTAL_SLIDES=110
-CHUNK_SIZE=10
-NUM_CHUNKS=$(( (TOTAL_SLIDES + CHUNK_SIZE - 1) / CHUNK_SIZE ))
+conda activate /rprojectnb/luadfrp/onkongho/.conda/envs/trident
+cd "$TRIDENT_DIR"
 
 mkdir -p "$JOB_DIR"
 
-echo "============================================"
-echo "NLST BATCH 5 PROCESSING"
-echo "Started: $(date)"
-echo "Total slides: $TOTAL_SLIDES"
-echo "Chunk size: $CHUNK_SIZE"
-echo "Total chunks: $NUM_CHUNKS"
-echo "============================================"
+echo "=== Batch 5: $(ls "$WSI_DIR"/*.svs 2>/dev/null | wc -l) slides ==="
 
-ALL_SLIDES=($(ls "$WORKING_DIR"/*.svs | xargs -I{} basename {} | sort))
-ACTUAL_COUNT=${#ALL_SLIDES[@]}
-echo "Found $ACTUAL_COUNT slides"
+# Step 1: Full pipeline (seg + coords + CONCH v1.5)
+python run_batch_of_slides.py \
+    --task all \
+    --wsi_dir "$WSI_DIR" --job_dir "$JOB_DIR" \
+    --segmenter grandqc --seg_conf_thresh 0.5 \
+    --remove_artifacts --artifact_mpp mpp15 \
+    --min_tissue_proportion 0.25 --skip_errors \
+    --mag 20 --patch_size 256 --max_workers 3 \
+    --patch_encoder conch_v15 --wsi_ext .svs
 
-for (( chunk=1; chunk<=NUM_CHUNKS; chunk++ )); do
-    START=$(( (chunk - 1) * CHUNK_SIZE + 1 ))
-    END=$(( chunk * CHUNK_SIZE ))
-    if [ $END -gt $TOTAL_SLIDES ]; then
-        END=$TOTAL_SLIDES
-    fi
+# Step 2: UNI v2 patch features
+python run_batch_of_slides.py \
+    --task feat \
+    --wsi_dir "$WSI_DIR" --job_dir "$JOB_DIR" \
+    --mag 20 --patch_size 256 --max_workers 3 \
+    --patch_encoder uni_v2 --skip_errors --wsi_ext .svs
 
-    echo ""
-    echo "=== CHUNK $chunk / $NUM_CHUNKS (slides $START to $END) ==="
-    echo "Time: $(date)"
+# Step 3: TITAN slide-level features
+python run_batch_of_slides.py \
+    --task feat \
+    --wsi_dir "$WSI_DIR" --job_dir "$JOB_DIR" \
+    --mag 20 --patch_size 256 --max_workers 3 \
+    --slide_encoder titan --skip_errors --wsi_ext .svs
 
-    # Build slide list for this chunk
-    echo "wsi" > "$SLIDE_LIST"
-    for (( i=START-1; i<END; i++ )); do
-        echo "${ALL_SLIDES[$i]}" >> "$SLIDE_LIST"
-    done
-
-    SVS_COUNT=$(( END - START + 1 ))
-    echo "[READY] $SVS_COUNT slides in this chunk"
-
-    echo "[STAGE 1/6] Segmentation (GrandQC + remove_artifacts) ..."
-    python $TRIDENT \
-        --task seg \
-        --wsi_dir "$WORKING_DIR" \
-        --job_dir "$JOB_DIR" \
-        --custom_list_of_wsis "$SLIDE_LIST" \
-        --segmenter grandqc \
-        --remove_artifacts \
-        --min_tissue_proportion 0.25
-
-    echo "[STAGE 2/6] Patch coords 256px 20x ..."
-    python $TRIDENT \
-        --task coords \
-        --wsi_dir "$WORKING_DIR" \
-        --job_dir "$JOB_DIR" \
-        --custom_list_of_wsis "$SLIDE_LIST" \
-        --mag 20 \
-        --patch_size 256 \
-        --overlap 0
-
-    echo "[STAGE 3/6] UNI v2 features ..."
-    python $TRIDENT \
-        --task feat \
-        --wsi_dir "$WORKING_DIR" \
-        --job_dir "$JOB_DIR" \
-        --custom_list_of_wsis "$SLIDE_LIST" \
-        --patch_encoder uni_v2 \
-        --mag 20 \
-        --patch_size 256
-
-    echo "[STAGE 4/6] Patch coords 512px 20x ..."
-    python $TRIDENT \
-        --task coords \
-        --wsi_dir "$WORKING_DIR" \
-        --job_dir "$JOB_DIR" \
-        --custom_list_of_wsis "$SLIDE_LIST" \
-        --mag 20 \
-        --patch_size 512 \
-        --overlap 0
-
-    echo "[STAGE 5/6] CONCH v1.5 features ..."
-    python $TRIDENT \
-        --task feat \
-        --wsi_dir "$WORKING_DIR" \
-        --job_dir "$JOB_DIR" \
-        --custom_list_of_wsis "$SLIDE_LIST" \
-        --patch_encoder conch_v15 \
-        --mag 20 \
-        --patch_size 512
-
-    echo "[STAGE 6/6] TITAN slide features ..."
-    python $TRIDENT \
-        --task feat \
-        --wsi_dir "$WORKING_DIR" \
-        --job_dir "$JOB_DIR" \
-        --custom_list_of_wsis "$SLIDE_LIST" \
-        --slide_encoder titan \
-        --mag 20 \
-        --patch_size 512
-
-    echo "[DONE] Chunk $chunk complete. Processed: $END / $TOTAL_SLIDES"
-done
-
-echo ""
-echo "============================================"
-echo "BATCH 5 COMPLETE"
-echo "Finished: $(date)"
-echo "Processed: $TOTAL_SLIDES / $TOTAL_SLIDES"
-echo "Output: $JOB_DIR"
-echo "============================================"
+echo "=== Batch 5 complete ==="
